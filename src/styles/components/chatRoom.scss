@@ -1,0 +1,27 @@
+#chatRoom {
+  .inputRow {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    input {
+      width: 90%;
+    }
+
+    button {
+      width: 9%;
+    }
+  }
+
+  .messages {
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+    margin: 10px;
+
+    .owner {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

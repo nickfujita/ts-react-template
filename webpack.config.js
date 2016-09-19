@@ -3,29 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
-var plugins = [
-  new NyanProgressPlugin(),
-  new HtmlWebpackPlugin({template: 'src/index.html'})
-];
-
-plugins = plugins.concat([
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
-]);
-
-// FOR PRODUCTION
-// plugins = plugins.concat([
-//   new webpack.optimize.OccurenceOrderPlugin(),
-//   new webpack.optimize.UglifyJsPlugin({
-//     compressor: {
-//       warnings: false
-//     },
-//     output: {
-//       comments: false
-//     },
-//   }),
-// ]);
-
 module.exports = {
   resolve: {
     extensions: ['', '.ts', '.tsx', '.js']
@@ -36,7 +13,12 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: ''
   },
-  plugins: plugins,
+  plugins: [
+    new NyanProgressPlugin(),
+    new HtmlWebpackPlugin({template: 'src/index.html'}),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+  ],
   module: {
     preLoaders: [
       {

@@ -10,24 +10,36 @@ class ChatRoom extends React.Component<IChatRoomProps, any> {
     this.chatInputField.value = '';
   }
 
+  sendOnEnter(event) {
+    if (event.keyCode === 13) {
+      this.sendMessage();
+    }
+  }
+
   render() {
     return (
       <div id='chatRoom'>
         <div className='inputRow'>
           <input
             ref={chatInputField => this.chatInputField = chatInputField}
+            type='text'
+            onKeyDown={this.sendOnEnter.bind(this)}
           />
           <button onClick={this.sendMessage.bind(this)}>Send</button>
         </div>
-        {this.props.chatRoom.messages.map((message: Message, index) => {
-          return (
-            <div
-              key={message.getText() + index}
-            >
-              {message.getText()}
-            </div>
-          )
-        })}
+        <div className='messages'>
+          {this.props.chatRoom.messages.map((message: Message, index) => {
+            let isSend = index % 2 === 0;
+            let text =  message.getText();
+            return (
+              <div
+                key={message.getText() + index}
+              >
+                {isSend ? `Me: ${text}` : `Friend: ${text}`}
+              </div>
+            )
+          })}
+        </div>
       </div>
     );
   }

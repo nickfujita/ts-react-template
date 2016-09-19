@@ -1,7 +1,7 @@
 {
   "name": "ts_react_template",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a template for a single page app using React, Redux, React Router, and Typescript.",
   "scripts": {
     "start": "node server.js"
   },
@@ -9,18 +9,13 @@
     "node": ">=6.3.0"
   },
   "engineStrict": true,
-  "author": "",
-  "license": "ISC",
+  "author": "NICK FUJITA (nickfujita@gmail.com)",
+  "license": "MIT",
   "devDependencies": {
-    "cross-env": "~1.0.8",
     "css-loader": "~0.23.1",
-    "exports-loader": "0.6.3",
-    "expose-loader": "~0.7.1",
     "express": "~4.14.0",
     "file-loader": "~0.9.0",
     "html-webpack-plugin": "~2.22.0",
-    "imports-loader": "~0.6.5",
-    "minimist": "~1.2.0",
     "node-sass": "~3.8.0",
     "nyan-progress-webpack-plugin": "~1.1.4",
     "redux-logger": "~2.6.1",

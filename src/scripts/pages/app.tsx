@@ -11,7 +11,7 @@ class App extends React.Component<any, any> {
   }
   render() {
     return (
-      <div>
+      <div id='index'>
         <button onClick={this.goToCounterPage.bind(this)}>Counter Page</button>
         <button onClick={this.goToChatroom.bind(this)}>Chatroom</button>
       </div>
