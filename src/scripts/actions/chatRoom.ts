@@ -3,10 +3,10 @@ import {
   CLEAR_MESSAGES,
 } from '../constants/actions';
 
-export function addMessage(data) {
+export function addMessage(message) {
   return {
     type: ADD_MESSAGE,
-    data,
+    data: new Message(message),
   };
 }
 
@@ -14,4 +14,11 @@ export function clearMessages() {
   return {
     type: CLEAR_MESSAGES,
   };
+}
+
+export class Message {
+  constructor(private text) {}
+  getText() {
+    return this.text;
+  }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addMessage } from '../actions/chatRoom';
+import { addMessage, Message } from '../actions/chatRoom';
 
 class ChatRoom extends React.Component<IChatRoomProps, any> {
   private chatInputField;
@@ -19,12 +19,12 @@ class ChatRoom extends React.Component<IChatRoomProps, any> {
           />
           <button onClick={this.sendMessage.bind(this)}>Send</button>
         </div>
-        {this.props.chatRoom.messages.map((message, index) => {
+        {this.props.chatRoom.messages.map((message: Message, index) => {
           return (
             <div
-              key={message + index}
+              key={message.getText() + index}
             >
-              {message}
+              {message.getText()}
             </div>
           )
         })}
@@ -50,6 +50,6 @@ export default connect(
 interface IChatRoomProps {
   dispatch: any,
   chatRoom: {
-    messages: string[],
+    messages: Message[],
   };
 }
