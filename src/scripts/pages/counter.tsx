@@ -9,8 +9,8 @@ class CounterPage extends React.Component<ICounterPageProps, any> {
       <div id='counterPage'>
         <h1>{this.props.counter.total}</h1>
         <div className='counterButtons'>
-          <button onClick={() => {this.props.dispatch(incrementCounter())}}>Add</button>
-          <button onClick={() => {this.props.dispatch(decrementCounter())}}>Subtract</button>
+          <button onClick={() => this.props.dispatch(incrementCounter())}>Add</button>
+          <button onClick={() => this.props.dispatch(decrementCounter())}>Subtract</button>
         </div>
       </div>
     );
