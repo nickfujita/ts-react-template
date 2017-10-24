@@ -1,4 +1,4 @@
-#chatRoom {
+.chatRoom {
   .inputRow {
     position: fixed;
     bottom: 0;
@@ -15,9 +15,9 @@
 
   .messages {
     position: absolute;
-    bottom: 20px;
+    bottom: 20;
     width: 80%;
-    margin: 10px;
+    margin: 10;
 
     .owner {
       display: flex;

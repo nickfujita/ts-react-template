@@ -19,8 +19,8 @@ class Main extends React.Component<any, any> {
   render() {
     return (
       <Provider store={store}>
-        <Router history={ history }>
-          { getRoutes() }
+        <Router history={history}>
+          {getRoutes()}
         </Router>
       </Provider>
     );

@@ -1,6 +1,7 @@
 {
   "extends": ["tslint-react"],
   "rules": {
+    "array-type": [true, "array"],
     "class-name": true,
     "comment-format": [false, "check-space"],
     "curly": true,
@@ -8,7 +9,6 @@
     "indent": [true, "spaces"],
     "interface-name": [true, "always-prefix"],
     "label-position": true,
-    "label-undefined": true,
     "member-ordering": [true,
         "public-before-private",
         "static-before-instance",
@@ -25,7 +25,6 @@
     ],
     "no-consecutive-blank-lines": true,
     "no-construct": true,
-    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-eval": true,
     "no-inferrable-types": true,
@@ -35,9 +34,7 @@
     "no-string-literal": false,
     "no-switch-case-fall-through": false,
     "no-trailing-whitespace": true,
-    "no-unreachable": true,
-    "no-unused-variable": [true, "react"],
-    "no-use-before-declare": true,
+    "no-use-before-declare": false,
     "no-var-keyword": true,
     "one-line": [true,
       "check-open-brace",
@@ -46,8 +43,12 @@
       "check-whitespace"
     ],
     "one-variable-per-declaration": true,
+    "semicolon": [true, "always"],
     "quotemark": [true, "single"],
-    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "trailing-comma": [true, {
+      "multiline": "always",
+      "singleline": "never"
+    }],
     "triple-equals": true,
     "variable-name": false,
     "whitespace": [true,
@@ -61,6 +62,9 @@
     ],
     "jsx-alignment": true,
     "jsx-no-string-ref": true,
-    "jsx-self-close": true
+    "jsx-self-close": true,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "jsx-wrap-multiline": false
   }
 }

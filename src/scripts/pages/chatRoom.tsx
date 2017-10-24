@@ -5,8 +5,13 @@ import { addMessage, Message } from '../actions/chatRoom';
 class ChatRoom extends React.Component<IChatRoomProps, any> {
   private chatInputField;
 
+  componentWillMount() {
+    this.sendOnEnter = this.sendOnEnter.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
+  }
+
   sendMessage() {
-    this.props.dispatch(addMessage(this.chatInputField.value))
+    this.props.dispatch(addMessage(this.chatInputField.value));
     this.chatInputField.value = '';
   }
 
@@ -18,14 +23,14 @@ class ChatRoom extends React.Component<IChatRoomProps, any> {
 
   render() {
     return (
-      <div id='chatRoom'>
+      <div className='chatRoom'>
         <div className='inputRow'>
           <input
             ref={chatInputField => this.chatInputField = chatInputField}
             type='text'
-            onKeyDown={this.sendOnEnter.bind(this)}
+            onKeyDown={this.sendOnEnter}
           />
-          <button onClick={this.sendMessage.bind(this)}>Send</button>
+          <button onClick={this.sendMessage}>Send</button>
         </div>
         <div className='messages'>
           {this.props.chatRoom.messages.map((message: Message, index) => {
@@ -37,7 +42,7 @@ class ChatRoom extends React.Component<IChatRoomProps, any> {
               >
                 {isSend ? `Me: ${text}` : `Friend: ${text}`}
               </div>
-            )
+            );
           })}
         </div>
       </div>
@@ -55,12 +60,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps
-)(ChatRoom);
+export default connect(mapStateToProps)(ChatRoom);
 
 interface IChatRoomProps {
-  dispatch: any,
+  dispatch: any;
   chatRoom: {
     messages: Message[],
   };

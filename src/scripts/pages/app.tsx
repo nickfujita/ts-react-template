@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 class App extends React.Component<any, any> {
+
+  componentWillMount() {
+    this.goToCounterPage = this.goToCounterPage.bind(this);
+    this.goToChatroom = this.goToChatroom.bind(this);
+  }
+
   goToCounterPage() {
     this.props.dispatch(push('/counter'));
   }
@@ -11,9 +17,9 @@ class App extends React.Component<any, any> {
   }
   render() {
     return (
-      <div id='index'>
-        <button onClick={this.goToCounterPage.bind(this)}>Counter Page</button>
-        <button onClick={this.goToChatroom.bind(this)}>Chatroom</button>
+      <div className='index'>
+        <button onClick={this.goToCounterPage}>Counter Page</button>
+        <button onClick={this.goToChatroom}>Chatroom</button>
       </div>
     );
   }
@@ -23,6 +29,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(
-  mapStateToProps
-)(App);
+export default connect(mapStateToProps)(App);

@@ -1,47 +1,77 @@
-const path = require('path');
+const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
-module.exports = {
-  resolve: {
-    extensions: ['', '.ts', '.tsx', '.js']
-  },
-  entry: ['webpack-hot-middleware/client', './src/index'],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: ''
-  },
-  plugins: [
-    new NyanProgressPlugin(),
+module.exports = (env) => {
+  const DISTRIBUTION = env && env.DISTRIBUTION === 'true';
+
+  let plugins = [
+    new StyleLintPlugin({
+      configFile: '.stylelintrc',
+      context: 'src/styles',
+      files: '**/*.scss',
+      failOnError: false,
+      quiet: false,
+    }),
     new HtmlWebpackPlugin({template: 'src/index.html'}),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
-  module: {
-    preLoaders: [
-      {
-        test: /\.ts(x?)$/,
-        loader: "tslint",
-        exclude: /node_modules/
-      }
-    ],
-    loaders: [
-      {
-        test: /\.ts(x?)$/,
-        exclude: [/node_modules/, /styles/],
-        loader: 'ts-loader',
-        include: path.join(__dirname, 'src'),
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style!css!sass',
-      },
-      {
-        test: /\.(jpe?g|png|woff|woff2|ttf)$/,
-        loader: 'url',
-      },
-    ]
+  ];
+
+  if(DISTRIBUTION) {
+    plugins = plugins.concat([
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          drop_console: true,
+          drop_debugger: true,
+          dead_code: true,
+        },
+        output: {
+          comments: false,
+        },
+      }),
+    ]);
   }
+
+  return {
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js' , '.scss'],
+    },
+    entry: ['./src/index'],
+    output: {
+      path: DISTRIBUTION ? path.join(__dirname, 'dist') : path.join(__dirname, 'build'),
+      filename: 'bundle.js',
+    },
+    devServer: {
+      contentBase: path.join(__dirname, 'build'),
+      port: 9000,
+      compress: false,
+      https: false,
+      open: true,
+    },
+    plugins: plugins,
+    module: {
+      rules: [
+        {
+          test: /\.ts(x?)$/,
+          enforce: 'pre',
+          loader: "tslint-loader",
+          exclude: [/node_modules/, /styles/],
+        },
+        {
+          test: /\.ts(x?)$/,
+          exclude: [/node_modules/, /styles/],
+          use: 'ts-loader',
+          include: path.join(__dirname, 'src'),
+        },
+        {
+          test: /\.scss$/,
+          use: ['style-loader', 'css-loader','sass-loader'],
+        },
+        {
+          test: /\.(jpe?g|png|woff|woff2|ttf|wav|svg)$/,
+          use: 'url-loader',
+        },
+      ],
+    },
+  };
 };

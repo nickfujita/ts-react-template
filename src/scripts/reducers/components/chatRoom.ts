@@ -16,4 +16,4 @@ export default function chatRoom(state = initialState, action) {
     default:
       return state;
   }
-};
+}

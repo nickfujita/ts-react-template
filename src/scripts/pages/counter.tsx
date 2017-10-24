@@ -6,7 +6,7 @@ class CounterPage extends React.Component<ICounterPageProps, any> {
 
   render() {
     return (
-      <div id='counterPage'>
+      <div className='counterPage'>
         <h1>{this.props.counter.total}</h1>
         <div className='counterButtons'>
           <button onClick={() => this.props.dispatch(incrementCounter())}>Add</button>
@@ -27,12 +27,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps
-)(CounterPage);
+export default connect(mapStateToProps)(CounterPage);
 
 interface ICounterPageProps {
-  dispatch: any,
+  dispatch: any;
   counter: {
     total: number,
   };
