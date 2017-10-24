@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
@@ -52,9 +52,7 @@ module.exports = (env) => {
       compress: false,
       https: false,
       open: true,
-      historyApiFallback: {
-        index: 'index.html'
-      }
+      historyApiFallback: true
     },
     plugins: plugins,
     module: {
