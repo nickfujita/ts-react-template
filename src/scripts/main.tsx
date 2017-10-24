@@ -6,12 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './store';
 import { getRoutes } from './routes';
 
-import { Route, IndexRoute } from 'react-router';
-import App from './pages/app';
-import Container from './pages/_container';
-import CounterPage from './pages/counter';
-import ChatRoom from './pages/ChatRoom';
-
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
