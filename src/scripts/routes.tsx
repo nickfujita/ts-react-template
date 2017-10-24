@@ -9,8 +9,8 @@ export function getRoutes() {
   return (
     <Route path='/' component={Container}>
       <IndexRoute component={App} />
-      <Route path={'counter'} component={CounterPage} />
-      <Route path={'chat'} component={ChatRoom} />
+      <Route path='counter' component={CounterPage} />
+      <Route path='chat' component={ChatRoom} />
     </Route>
   );
 }

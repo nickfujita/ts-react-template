@@ -26,11 +26,7 @@ class Main extends React.Component<any, any> {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <Route path='/' component={Container}>
-            <IndexRoute component={App} />
-            <Route path={'counter'} component={CounterPage} />
-            <Route path={'chat'} component={ChatRoom} />
-          </Route>
+          {getRoutes()}
         </Router>
       </Provider>
     );
