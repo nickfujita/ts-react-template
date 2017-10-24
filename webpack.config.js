@@ -1,12 +1,18 @@
 const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (env) => {
   const DISTRIBUTION = env && env.DISTRIBUTION === 'true';
 
   let plugins = [
+    new HtmlWebpackPlugin({
+      inlineSource: '.(js)$',
+      template: 'src/index.html'
+    }),
+    new HtmlWebpackInlineSourcePlugin(),
     new StyleLintPlugin({
       configFile: '.stylelintrc',
       context: 'src/styles',
@@ -14,7 +20,6 @@ module.exports = (env) => {
       failOnError: false,
       quiet: false,
     }),
-    new HtmlWebpackPlugin({template: 'src/index.html'}),
   ];
 
   if(DISTRIBUTION) {
@@ -38,7 +43,7 @@ module.exports = (env) => {
     },
     entry: ['./src/index'],
     output: {
-      path: DISTRIBUTION ? path.join(__dirname, 'dist') : path.join(__dirname, 'build'),
+      path: path.join(__dirname, 'build'),
       filename: 'bundle.js',
     },
     devServer: {
@@ -47,6 +52,9 @@ module.exports = (env) => {
       compress: false,
       https: false,
       open: true,
+      historyApiFallback: {
+        index: 'index.html'
+      }
     },
     plugins: plugins,
     module: {
